@@ -25,7 +25,7 @@ const ContactModal = ({ onClose }) => {
     }
 
     try {
-      const response = await fetch("https://ageinvest-backend.onrender.com/send", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
