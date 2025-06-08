@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://peijao.github.io/ageinvest-site",
+  "homepage": "https://peijao.github.io/age-site",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
