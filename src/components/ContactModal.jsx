@@ -25,7 +25,7 @@ const ContactModal = ({ onClose }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/send", {
+      const response = await fetch("https://ageinvest-backend.onrender.com/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
