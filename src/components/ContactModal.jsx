@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import emailjs from "@emailjs/browser";
 import { toast } from "react-hot-toast";
-
-const SERVICE_ID = "service_vuj21uc";      // Твой ID сервиса EmailJS
-const TEMPLATE_ID = "template_3ljm6co";    // Твой ID шаблона EmailJS
-const PUBLIC_KEY = "NEl9Dfv6Gwj-9oVlC";    // Твой публичный ключ EmailJS
 
 const ContactModal = ({ onClose }) => {
   const { t } = useTranslation();
@@ -21,7 +16,7 @@ const ContactModal = ({ onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.formName || !formData.formPhone) {
@@ -29,25 +24,25 @@ const ContactModal = ({ onClose }) => {
       return;
     }
 
-    const templateParams = {
-      name: formData.formName,
-      phone: formData.formPhone,
-      message: formData.formMessage,
-      time: new Date().toLocaleString(),
-    };
-
-    emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      .then(() => {
-        toast.success(t("messageSent", "Сообщение отправлено!"), {
-          duration: 5000,
-        });
-        setFormData({ formName: "", formPhone: "", formMessage: "" });
-        setTimeout(onClose, 2000); // Закрытие модального окна через 6 сек
-      })
-      .catch(() => {
-        toast.error(t("Ошибка при отправке сообщения. Попробуйте позже."));
+    try {
+      const response = await fetch("http://localhost:3001/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formName: formData.formName,
+          formPhone: formData.formPhone,
+          formMessage: formData.formMessage,
+        }),
       });
+
+      if (!response.ok) throw new Error("Ошибка сети");
+
+      toast.success(t("messageSent", "Сообщение отправлено!"), { duration: 5000 });
+      setFormData({ formName: "", formPhone: "", formMessage: "" });
+      setTimeout(onClose, 2000);
+    } catch (error) {
+      toast.error(t("Ошибка при отправке сообщения. Попробуйте позже."));
+    }
   };
 
   return (
