@@ -1,0 +1,51 @@
+import React from "react";
+import background from "../assets/img/background.jpg";
+import { useTranslation } from "react-i18next";
+
+const HeroSection = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+
+  let firstLine = "";
+  let secondLine = "";
+
+  if (lang === "hy") {
+    firstLine = "Մենք պարզապես կառուցում ենք վայրը,";
+    secondLine = "որը կկոչեք տուն";
+  } else if (lang === "ru") {
+    firstLine = "Мы просто строим место, которое";
+    secondLine = "вы назовёте домом";
+  } else {
+    // fallback for English or others
+    firstLine = "We’re simply building the place";
+    secondLine = "you’ll call home";
+  }
+
+  return (
+    <section
+      id="hero"
+      className="relative h-[300px] hover:h-[90vh] transition-all duration-500 flex items-center justify-center text-white text-center px-8 group overflow-hidden"
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-60 group-hover:bg-opacity-0 transition-opacity duration-500 pointer-events-none z-0"></div>
+
+      <div className="relative z-10 transition-transform duration-500 transform group-hover:-translate-y-20 group-hover:brightness-125">
+        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg leading-snug">
+          <span>{firstLine}</span>
+          <br />
+          <span>{secondLine}</span>
+        </h1>
+        <p className="mt-4 text-lg md:text-2xl drop-shadow-md max-w-3xl mx-auto">
+          {t("mainDesc")}
+        </p>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;

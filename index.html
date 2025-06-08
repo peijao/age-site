@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGE Invest — Մենք պարզապես կառուցում ենք ձեր նոր տունը</title>
+  <style>
+    .bg-hero {
+      position: relative;
+      width: 100vw;
+      height: 300px;
+      max-width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background-image: url('img/background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 2rem;
+      transition: height 0.5s ease;
+    }
+
+    .bg-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: background-color 0.5s ease;
+      z-index: 0;
+    }
+
+    .bg-hero:hover::before {
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+
+    .bg-hero:hover {
+      height: 80vh;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
