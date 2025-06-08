@@ -38,6 +38,7 @@ const translations = {
       priceLabel: "Գինը 1 մ² սկսած",
       areaLabel: "Նվազագույն մակերեսը",
       currency: "AMD",
+      invalidPhone: "Մուտքագրեք ճիշտ հեռախոսահամարը։",
     },
   },
   ru: {
@@ -77,6 +78,7 @@ const translations = {
       priceLabel: "Цена за 1 м² начиная с",
       areaLabel: "Минимальная площадь",
       currency: "AMD",
+      invalidPhone: "Введите корректный номер телефона.",
     },
   },
   en: {
@@ -117,6 +119,7 @@ const translations = {
       priceLabel: "Price 1 m² starting from",
       areaLabel: "Minimum area",
       currency: "AMD",
+      invalidPhone: "Enter a valid phone number.",
     },
   },
 };

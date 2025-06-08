@@ -26,12 +26,12 @@ const ContactModal = ({ onClose }) => {
     e.preventDefault();
 
     if (!formData.formName || !formData.formPhone) {
-      toast.error(t("Пожалуйста, заполните имя и номер телефона."));
+      toast.error(t("fillNamePhone", "Пожалуйста, заполните имя и номер телефона."));
       return;
     }
 
     if (!isValidPhoneNumber(formData.formPhone)) {
-      toast.error(t("Введите корректный номер телефона."));
+      toast.error(t("invalidPhone"));
       return;
     }
 
@@ -46,13 +46,13 @@ const ContactModal = ({ onClose }) => {
         }),
       });
 
-      if (!response.ok) throw new Error("Ошибка сети");
+      if (!response.ok) throw new Error("Network error");
 
-      toast.success(t("messageSent", "Сообщение отправлено!"), { duration: 5000 });
+      toast.success(t("messageSent"), { duration: 5000 });
       setFormData({ formName: "", formPhone: "", formMessage: "" });
       setTimeout(onClose, 2000);
     } catch (error) {
-      toast.error(t("Ошибка при отправке сообщения. Попробуйте позже."));
+      toast.error(t("sendError", "Ошибка при отправке сообщения. Попробуйте позже."));
     }
   };
 
@@ -68,19 +68,19 @@ const ContactModal = ({ onClose }) => {
         <button
           className="absolute top-3 right-3 text-2xl font-bold text-gray-600 hover:text-black"
           onClick={onClose}
-          aria-label="Закрыть"
+          aria-label={t("close", "Закрыть")}
         >
           &times;
         </button>
 
         <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">
-          {t("contactUs", "Связаться с нами")}
+          {t("contactUs")}
         </h2>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-left text-sm font-medium text-gray-700 mb-1">
-              {t("formName", "Ваше имя")}
+              {t("formName")}
             </label>
             <input
               type="text"
@@ -89,13 +89,13 @@ const ContactModal = ({ onClose }) => {
               onChange={handleChange}
               required
               className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-              placeholder={t("enterName", "Введите имя")}
+              placeholder={t("enterName")}
             />
           </div>
 
           <div>
             <label className="block text-left text-sm font-medium text-gray-700 mb-1">
-              {t("formPhone", "Ваш номер телефона")}
+              {t("formPhone")}
             </label>
             <PhoneInput
               international
@@ -103,14 +103,14 @@ const ContactModal = ({ onClose }) => {
               value={formData.formPhone}
               onChange={handlePhoneChange}
               className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-              placeholder={t("enterPhone", "Введите номер телефона")}
+              placeholder={t("enterPhone")}
               required
             />
           </div>
 
           <div>
             <label className="block text-left text-sm font-medium text-gray-700 mb-1">
-              {t("formMessage", "Ваше сообщение")}
+              {t("formMessage")}
             </label>
             <textarea
               name="formMessage"
@@ -118,7 +118,7 @@ const ContactModal = ({ onClose }) => {
               value={formData.formMessage}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded px-4 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-black"
-              placeholder={t("enterMessage", "Введите сообщение")}
+              placeholder={t("enterMessage")}
             ></textarea>
           </div>
 
@@ -126,7 +126,7 @@ const ContactModal = ({ onClose }) => {
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition-colors"
           >
-            {t("sendMessage", "Отправить")}
+            {t("sendMessage")}
           </button>
         </form>
       </div>
