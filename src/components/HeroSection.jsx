@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import background from "../assets/img/background.jpg";
 import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  const handleClick = () => {
+    if (isMobile) {
+      setIsExpanded((prev) => !prev);
+    }
+  };
 
   let firstLine = "";
   let secondLine = "";
@@ -21,24 +40,56 @@ const HeroSection = () => {
   }
 
   const isCompactLang = lang === "ru" || lang === "hy";
+  const isRussianMobile = isMobile && lang === "ru";
+
+  const baseClasses =
+    "relative transition-all duration-500 flex items-center justify-center text-white text-center px-8 overflow-hidden";
+
+  const heightClass = isMobile
+    ? isExpanded
+      ? "h-[90vh]"
+      : "h-[300px]"
+    : "h-[300px] hover:h-[90vh] group";
+
+  const overlayClass = isMobile
+    ? isExpanded
+      ? "bg-opacity-0"
+      : "bg-opacity-60"
+    : "bg-opacity-60 group-hover:bg-opacity-0";
+
+  const contentTransform = isMobile
+    ? isExpanded
+      ? "-translate-y-20 brightness-125"
+      : ""
+    : "group-hover:-translate-y-20 group-hover:brightness-125";
 
   return (
     <section
       id="hero"
-      className="relative h-[300px] hover:h-[90vh] transition-all duration-500 flex items-center justify-center text-white text-center px-8 group overflow-hidden"
+      className={`${baseClasses} ${heightClass}`}
       style={{
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
+      onClick={handleClick}
     >
-      <div className="absolute inset-0 bg-black bg-opacity-60 group-hover:bg-opacity-0 transition-opacity duration-500 pointer-events-none z-0"></div>
+      <div
+        className={`absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none z-0 ${overlayClass}`}
+      ></div>
 
-      <div className="relative z-10 transition-transform duration-500 transform group-hover:-translate-y-20 group-hover:brightness-125">
+      <div
+        className={`relative z-10 transition-transform duration-500 transform ${contentTransform}`}
+      >
         <h1
-          className={`text-4xl md:text-6xl font-bold drop-shadow-lg
-            ${isCompactLang ? "leading-tight tracking-tight" : "leading-snug"}`}
+          className={`text-4xl md:text-6xl font-bold drop-shadow-lg ${
+            isRussianMobile
+              ? "leading-[1.1] tracking-tight"
+              : isCompactLang
+              ? "leading-tight tracking-tight"
+              : "leading-snug"
+          }`}
         >
           <span>{firstLine}</span>
           <br />
