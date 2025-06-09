@@ -20,6 +20,8 @@ const HeroSection = () => {
     secondLine = "you’ll call home";
   }
 
+  const isCompactLang = lang === "ru" || lang === "hy";
+
   return (
     <section
       id="hero"
@@ -35,9 +37,8 @@ const HeroSection = () => {
 
       <div className="relative z-10 transition-transform duration-500 transform group-hover:-translate-y-20 group-hover:brightness-125">
         <h1
-          className={`text-4xl md:text-6xl font-bold drop-shadow-lg ${
-            lang === "ru" ? "leading-tight" : "leading-snug"
-          }`}
+          className={`text-4xl md:text-6xl font-bold drop-shadow-lg
+            ${isCompactLang ? "leading-tight tracking-tight" : "leading-snug"}`}
         >
           <span>{firstLine}</span>
           <br />
