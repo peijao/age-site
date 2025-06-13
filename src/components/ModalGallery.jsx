@@ -5,32 +5,22 @@ const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal }) => {
   const imageRef = useRef(null);
   const containerRef = useRef(null);
   const prevZoomed = useRef(false);
-  const zoomFactor = 3; // масштаб при увеличении
+  const zoomFactor = 3;
 
-  const toggleZoom = () => {
-    setZoomed((prev) => !prev);
+  const centerScroll = () => {
+    const container = containerRef.current;
+    const image = imageRef.current;
+
+    if (container && image) {
+      const scrollLeft = (image.offsetWidth - container.clientWidth) / 2;
+      const scrollTop = (image.offsetHeight - container.clientHeight) / 2;
+      container.scrollTo({ left: scrollLeft, top: scrollTop, behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
-    if (
-      zoomed &&
-      !prevZoomed.current &&
-      containerRef.current &&
-      imageRef.current
-    ) {
-      setTimeout(() => {
-        const container = containerRef.current;
-        const image = imageRef.current;
-
-        const scrollLeft = (image.offsetWidth - container.clientWidth) / 2;
-        const scrollTop = (image.offsetHeight - container.clientHeight) / 2;
-
-        container.scrollTo({
-          left: scrollLeft,
-          top: scrollTop,
-          behavior: "smooth",
-        });
-      }, 100);
+    if (zoomed && !prevZoomed.current) {
+      setTimeout(centerScroll, 100);
     }
     prevZoomed.current = zoomed;
   }, [zoomed]);
@@ -44,16 +34,17 @@ const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal }) => {
 
   if (modalIndex === null) return null;
 
+  const stop = (e) => e.stopPropagation();
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90"
       onClick={closeModal}
     >
-      {/* Кнопки — вне контейнера с изображением, фиксированы на экране */}
       <button
         className="absolute top-4 right-4 text-white text-3xl font-bold bg-black bg-opacity-70 rounded p-1"
         onClick={(e) => {
-          e.stopPropagation();
+          stop(e);
           closeModal();
         }}
       >
@@ -63,7 +54,7 @@ const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal }) => {
       <button
         className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black bg-opacity-70 rounded p-1"
         onClick={(e) => {
-          e.stopPropagation();
+          stop(e);
           navigateModal("prev");
         }}
       >
@@ -73,14 +64,13 @@ const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal }) => {
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black bg-opacity-70 rounded p-1"
         onClick={(e) => {
-          e.stopPropagation();
+          stop(e);
           navigateModal("next");
         }}
       >
         ›
       </button>
 
-      {/* Контейнер с прокруткой и масштабируемым изображением */}
       <div
         ref={containerRef}
         className="overflow-auto bg-black"
@@ -89,19 +79,14 @@ const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal }) => {
           height: "90vh",
           cursor: zoomed ? "zoom-out" : "zoom-in",
         }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={stop}
       >
-        <div
-          style={{
-            width: "fit-content",
-            height: "fit-content",
-          }}
-        >
+        <div style={{ width: "fit-content", height: "fit-content" }}>
           <img
             ref={imageRef}
             src={schemas[modalIndex]}
             alt={`Схема ${modalIndex + 1}`}
-            onClick={toggleZoom}
+            onClick={() => setZoomed((prev) => !prev)}
             style={{
               maxWidth: "none",
               width: zoomed ? `${zoomFactor * 100}%` : "100%",

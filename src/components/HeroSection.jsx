@@ -10,34 +10,23 @@ const HeroSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   const handleClick = () => {
-    if (isMobile) {
-      setIsExpanded((prev) => !prev);
-    }
+    if (isMobile) setIsExpanded((prev) => !prev);
   };
 
-  let firstLine = "";
-  let secondLine = "";
+  const phrases = {
+    hy: ["Մենք պարզապես կառուցում ենք վայրը,", "որը կկոչեք տուն"],
+    ru: ["Мы просто строим место, которое", "вы назовёте домом"],
+    en: ["We’re simply building the place", "you’ll call home"],
+  };
 
-  if (lang === "hy") {
-    firstLine = "Մենք պարզապես կառուցում ենք վայրը,";
-    secondLine = "որը կկոչեք տուն";
-  } else if (lang === "ru") {
-    firstLine = "Мы просто строим место, которое";
-    secondLine = "вы назовёте домом";
-  } else {
-    firstLine = "We’re simply building the place";
-    secondLine = "you’ll call home";
-  }
+  const [firstLine, secondLine] = phrases[lang] || phrases.en;
 
   const isCompactLang = lang === "ru" || lang === "hy";
   const isRussianMobile = isMobile && lang === "ru";
@@ -63,6 +52,14 @@ const HeroSection = () => {
       : ""
     : "group-hover:-translate-y-20 group-hover:brightness-125";
 
+  const titleClass = `text-4xl md:text-6xl font-bold drop-shadow-lg ${
+    isRussianMobile
+      ? "leading-[1.1] tracking-tight"
+      : isCompactLang
+      ? "leading-tight tracking-tight"
+      : "leading-snug"
+  }`;
+
   return (
     <section
       id="hero"
@@ -82,15 +79,7 @@ const HeroSection = () => {
       <div
         className={`relative z-10 transition-transform duration-500 transform ${contentTransform}`}
       >
-        <h1
-          className={`text-4xl md:text-6xl font-bold drop-shadow-lg ${
-            isRussianMobile
-              ? "leading-[1.1] tracking-tight"
-              : isCompactLang
-              ? "leading-tight tracking-tight"
-              : "leading-snug"
-          }`}
-        >
+        <h1 className={titleClass}>
           <span>{firstLine}</span>
           <br />
           <span>{secondLine}</span>

@@ -16,16 +16,13 @@ const translations = {
       projectsAbout: '"Arma Town" նոր սերնդի խոշորածավալ շինարարական նախագիծ է, որն իրականացվում է զրոյից և ներառում է ամբողջությամբ ինքնավար ենթակառուցվածք։ Նախագծի շրջանակում նախատեսվում է բնակելի և առևտրային շինությունների կառուցում, հասարակական տարածքների ձևավորում, ինչպես նաև անհրաժեշտ բոլոր ճարտարագիտական և սոցիալական ենթակառուցվածքների ստեղծում։ Ներդրումների ծավալով և նախատեսվող տարածքով նախագիծը դառնում է տարածաշրջանի խոշորագույններից մեկը: "Arma Town" կդառնա նոր գրավչության կենտրոն, կստեղծի հարյուրավոր աշխատատեղեր և կխթանի տնտեսության զարգացումն ու կյանքի որակի բարձրացումը։',
       projectsSchemes: '"Arma Town" տների նախագծեր:',
       projectsAddress: "ԼԵՐՄՈՆՏՈՎԻ ՓՈՂՈՑ, 105/4",
-
       contactAddress: "Երևան, Հայաստան",
       contactPhone: "+374 (44) 304-206",
       contactEmail: "info@ageinvest.am",
-      priceInfoLine1:
-        "Նախնական փուլերում՝ գնման ավելի շահավետ պայմաններ։",
+      priceInfoLine1: "Նախնական փուլերում՝ գնման ավելի շահավետ պայմաններ։",
       priceInfoLine2: "Կապվեք մեզ հետ այսօր՝ ներդրում արեք ձեր ապագայի համար։",
       priceInfoLine3: "Զանգահարեք մեզ կամ թողեք ձեր տվյալները — մենք կկապվենք ձեզ հետ։",
       contactUs: "Ներբեռնել հայտ",
-
       formName: "Անուն",
       enterName: "Մուտքագրեք անունը",
       formPhone: "Հեռախոս",
@@ -34,7 +31,6 @@ const translations = {
       enterMessage: "Մուտքագրեք հաղորդագրությունը",
       sendMessage: "Ուղարկել",
       messageSent: "Հաղորդագրությունը ուղարկվեց",
-
       priceLabel: "Գինը 1 մ² սկսած",
       areaLabel: "Նվազագույն մակերեսը",
       currency: "AMD",
@@ -55,17 +51,13 @@ const translations = {
       projectsAbout: `"Arma Town" — масштабный строительный проект нового поколения, реализуемый с нуля и включающий полностью автономную инфраструктуру. В рамках проекта предусмотрено строительство жилых и коммерческих зданий, обустройство общественных пространств, а также создание всей необходимой инженерной и социальной инфраструктуры. По объёму инвестиций и предполагаемой площади проект становится одним из крупнейших в регионе. "Arma Town" станет новым центром притяжения, создаст сотни рабочих мест и даст импульс развитию экономики и повышению качества жизни.`,
       projectsSchemes: 'Проекты домов "Arma Town".',
       projectsAddress: "УЛИЦА ЛЕРМОНТОВА, 105/4",
-
       contactAddress: "Ереван, Армения",
       contactPhone: "+374 (44) 304-206",
       contactEmail: "info@ageinvest.am",
-      priceInfoLine1:
-        "На ранних этапах — более привлекательные условия покупки.",
+      priceInfoLine1: "На ранних этапах — более привлекательные условия покупки.",
       priceInfoLine2: "Свяжитесь с нами сегодня — инвестируйте в своё будущее.",
-      priceInfoLine3:
-        "Позвоните нам или оставьте свои контактные данные — мы свяжемся с вами.",
+      priceInfoLine3: "Позвоните нам или оставьте свои контактные данные — мы свяжемся с вами.",
       contactUs: "Оставить заявку",
-
       formName: "Ваше имя",
       enterName: "Введите имя",
       formPhone: "Ваш номер телефона",
@@ -74,7 +66,6 @@ const translations = {
       enterMessage: "Введите сообщение",
       sendMessage: "Отправить",
       messageSent: "Сообщение отправлено",
-
       priceLabel: "Цена за 1 м² начиная с",
       areaLabel: "Минимальная площадь",
       currency: "AMD",
@@ -91,22 +82,18 @@ const translations = {
       aboutTitle: "About the company.",
       aboutText:
         "AGE Invest is a modern construction company specializing in the development and construction of residential and commercial projects in Armenia. Our goal is to create innovative, comfortable, and high-quality environments that contribute to the sustainable growth of urban infrastructure.",
-      projectsTitle:
-        'The residential area "Arma Town" in Armavir.',
-      projectsAbout: '“Arma Town” is a large-scale next-generation construction project, developed from the ground up and featuring a fully autonomous infrastructure. The project includes the construction of residential and commercial buildings, the development of public spaces, as well as the creation of all necessary engineering and social infrastructure. With its investment volume and projected area, the project ranks among the largest in the region. “Arma Town” will become a new center of attraction, generate hundreds of jobs, and contribute to economic growth and improved quality of life.',
+      projectsTitle: 'The residential area "Arma Town" in Armavir.',
+      projectsAbout:
+        '“Arma Town” is a large-scale next-generation construction project, developed from the ground up and featuring a fully autonomous infrastructure. The project includes the construction of residential and commercial buildings, the development of public spaces, as well as the creation of all necessary engineering and social infrastructure. With its investment volume and projected area, the project ranks among the largest in the region. “Arma Town” will become a new center of attraction, generate hundreds of jobs, and contribute to economic growth and improved quality of life.',
       projectsSchemes: 'House projects of "Arma Town".',
       projectsAddress: "105/4 Lermontov Street",
-
       contactAddress: "Yerevan, Armenia",
       contactPhone: "+374 (44) 304-206",
       contactEmail: "info@ageinvest.am",
-      priceInfoLine1:
-        "At early stages — more attractive purchase conditions.",
+      priceInfoLine1: "At early stages — more attractive purchase conditions.",
       priceInfoLine2: "Contact us today — invest in your future.",
-      priceInfoLine3:
-        "Call us or leave your contact details — we will get back to you.",
+      priceInfoLine3: "Call us or leave your contact details — we will get back to you.",
       contactUs: "Request a call",
-
       formName: "Name",
       enterName: "Enter name",
       formPhone: "Phone",
@@ -115,7 +102,6 @@ const translations = {
       enterMessage: "Enter message",
       sendMessage: "Send",
       messageSent: "Message sent",
-
       priceLabel: "Price 1 m² starting from",
       areaLabel: "Minimum area",
       currency: "AMD",
@@ -126,11 +112,14 @@ const translations = {
 
 i18n.use(initReactI18next).init({
   resources: translations,
-  lng: "hy", // язык по умолчанию
-  fallbackLng: "en",
+  lng: "hy", // основной язык — армянский
+  fallbackLng: "hy", // даже при ошибке — армянский
   interpolation: {
-    escapeValue: false, // React экранирует HTML
+    escapeValue: false,
   },
 });
+
+// Принудительно задаём язык, игнорируя сохранённое значение в localStorage
+localStorage.setItem("i18nextLng", "hy");
 
 export default i18n;
