@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 import background from "./assets/img/background.jpg";
 import logo from "./assets/img/logo.png";
@@ -20,7 +21,7 @@ import { schemas } from "./constants";
 import useLanguage from "./hooks/useLanguage";
 import useModalGallery from "./hooks/useModalGallery";
 
-import { Toaster } from "react-hot-toast"; // <--- ДОБАВЛЕНО
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -44,19 +45,34 @@ const App = () => {
 
       {/* Контент поверх водяного знака */}
       <div className="relative z-10">
-        <Toaster position="top-right" reverseOrder={false} /> {/* <-- ДОБАВЛЕНО */}
-        <Header t={t} logo={logo} setLang={changeLanguage} lang={lang} />
-        <HeroSection background={background} t={t} />
-        <AboutSection t={t} />
-        <AboutVideoSection />
-        <ProjectsSection schemas={schemas} openModal={openModal} lang={lang} />
-        <PricingSection t={t} />
+        <Toaster position="top-right" reverseOrder={false} />
+        <Header
+          t={t}
+          logo={logo}
+          setLang={changeLanguage}
+          lang={lang}
+          onSelectSection={(section) => {
+            const element = document.getElementById(section);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        />
+
+        {/* Рендерим все секции с id для скролла */}
+        <HeroSection id="hero" background={background} t={t} />
+        <AboutSection id="about" t={t} />
+        <AboutVideoSection id="about-video" />
+        <ProjectsSection id="projects" schemas={schemas} openModal={openModal} lang={lang} />
+        <PricingSection id="pricing" t={t} />
         <ContactSection
+          id="contact"
           t={t}
           logo={logo}
           icons={{ MapPinIcon, PhoneIcon, EnvelopeIcon }}
         />
-        <Footer />
+        <Footer id="footer" />
+
         {modalIndex !== null && (
           <ModalGallery
             modalIndex={modalIndex}

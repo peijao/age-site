@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 
 // Общие параметры анимации для элементов при наведении
@@ -9,7 +8,7 @@ const hoverAnimation = {
   transition: { type: "spring", stiffness: 300 },
 };
 
-const Header = ({ t, logo, lang, setLang }) => {
+const Header = ({ t, logo, lang, setLang, onSelectSection }) => {
   const handleLangChange = (e) => setLang(e.target.value);
 
   const navItems = ["about", "projects", "contact"];
@@ -37,16 +36,14 @@ const Header = ({ t, logo, lang, setLang }) => {
               key={section}
               whileHover={hoverAnimation}
               className="cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectSection(section);
+              }}
             >
-              <Link
-                to={section}
-                smooth
-                duration={600}
-                offset={-80}
-                className="font-extrabold underline decoration-black decoration-2"
-              >
+              <span className="font-extrabold underline decoration-black decoration-2">
                 {t(`nav${section[0].toUpperCase()}${section.slice(1)}`)}
-              </Link>
+              </span>
             </motion.div>
           ))}
         </nav>
