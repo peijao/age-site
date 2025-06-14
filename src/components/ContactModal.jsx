@@ -13,6 +13,8 @@ const ContactModal = ({ onClose }) => {
     formMessage: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleChange = ({ target: { name, value } }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -21,15 +23,21 @@ const ContactModal = ({ onClose }) => {
     e.preventDefault();
     const { formName, formPhone, formMessage } = formData;
 
-    if (!formName || !formPhone) {
-      toast.error(t("invalidPhone"));
+    const nameEmpty = !formName.trim();
+    const phoneValid = formPhone && isValidPhoneNumber(formPhone);
+
+    if (nameEmpty && !phoneValid) {
+      setError(t("enterNameAndPhone"));
+      return;
+    } else if (nameEmpty) {
+      setError(t("enterNameOnly"));
+      return;
+    } else if (!phoneValid) {
+      setError(t("enterPhoneOnly"));
       return;
     }
 
-    if (!isValidPhoneNumber(formPhone)) {
-      toast.error(t("invalidPhone"));
-      return;
-    }
+    setError(""); // Сброс ошибки
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/send`, {
@@ -116,6 +124,10 @@ const ContactModal = ({ onClose }) => {
             ></textarea>
           </div>
 
+          {error && (
+            <p className="text-red-600 text-sm font-medium -mt-2 mb-2">{error}</p>
+          )}
+
           <button
             type="submit"
             className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition-colors"
@@ -124,14 +136,14 @@ const ContactModal = ({ onClose }) => {
           </button>
         </form>
 
-      {/* Стили для PhoneInput: убрать оранжевый фокус, заменить на черный */}
-      <style>{`
-        .phone-input-wrapper input:focus {
-          outline: none !important;
-          border-color: black !important;
-          box-shadow: 0 0 0 2px black !important;
-        }
-      `}</style>
+        {/* Стили для PhoneInput: убрать оранжевый фокус, заменить на черный */}
+        <style>{`
+          .phone-input-wrapper input:focus {
+            outline: none !important;
+            border-color: black !important;
+            box-shadow: 0 0 0 2px black !important;
+          }
+        `}</style>
       </div>
     </div>
   );

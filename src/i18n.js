@@ -11,9 +11,9 @@ const translations = {
       mainDesc: "Որտեղ երազանքները վեր են ածվում ամուր հիմքերի:",
       aboutTitle: "Ընկերության մասին:",
       aboutText:
-        "AGE Invest-ը ժամանակակից շինարարական ընկերություն է, որը մասնագիտացած է բնակելի և կոմերցիոն նախագծերի մշակման և կառուցման գործում Հայաստանում։ Մեր նպատակն է ստեղծել նորարարական, հարմարավետ և որակյալ միջավայր՝ նպաստելով քաղաքաշինության կայուն զարգացմանը։",
+        "AGE Invest-ը ժամանակակից շինարարական ընկերություն է, որը մասնագիտացած է բնակելի և կոմերցիոն նախագծերի մշակման և կառուցման գործում Հայաստանում։ Մեր նպատակն է ստեղծել նորարարական, հարմարավետ և որակյալ միջավայր՝ նպաստելով քաղաքաշինության կայուն发展的։",
       projectsTitle: '"Arma Town" բնակելի թաղամաս Արմավիրում։',
-      projectsAbout: '"Arma Town" նոր սերնդի խոշորածավալ շինարարական նախագիծ է, որն իրականացվում է զրոյից և ներառում է ամբողջությամբ ինքնավար ենթակառուցվածք։ Նախագծի շրջանակում նախատեսվում է բնակելի և առևտրային շինությունների կառուցում, հասարակական տարածքների ձևավորում, ինչպես նաև անհրաժեշտ բոլոր ճարտարագիտական և սոցիալական ենթակառուցվածքների ստեղծում։ Ներդրումների ծավալով և նախատեսվող տարածքով նախագիծը դառնում է տարածաշրջանի խոշորագույններից մեկը: "Arma Town" կդառնա նոր գրավչության կենտրոն, կստեղծի հարյուրավոր աշխատատեղեր և կխթանի տնտեսության զարգացումն ու կյանքի որակի բարձրացումը։',
+      projectsAbout: `"Arma Town" նոր սերնդի խոշորածավալ շինարարական նախագիծ է, որն իրականացվում է զրոյից և ներառում է ամբողջովին ինքնավար ենթակառուցվածք։ Նախագծի շրջանակում նախատեսվում է բնակելի և առևտրային շինությունների կառուցում, հասարակական տարածքների ձևավորում, ինչպես նաև անհրաժեշտ բոլոր ճարտարագիտական և սոցիալական ենթակառուցվածքների ստեղծում։ Ներդրումների ծավալով և նախատեսվող տարածքով նախագիծը դառնում է տարածաշրջանի խոշորագույններից մեկը։ "Arma Town" կդառնա նոր գրավչության կենտրոն, կստեղծի հարյուրավոր աշխատատեղեր և կխթանի տնտեսության զարգացումն ու կյանքի որակի բարձրացումը։`,
       projectsSchemes: '"Arma Town" տների նախագծեր:',
       projectsAddress: "ԼԵՐՄՈՆՏՈՎԻ ՓՈՂՈՑ, 105/4",
       contactAddress: "Երևան, Հայաստան",
@@ -31,10 +31,15 @@ const translations = {
       enterMessage: "Մուտքագրեք հաղորդագրությունը",
       sendMessage: "Ուղարկել",
       messageSent: "Հաղորդագրությունը ուղարկվեց",
+      sendError: "Սխալ հաղորդագրության ուղարկման ընթացքում",
+      close: "Փակել",
       priceLabel: "Գինը 1 մ² սկսած",
       areaLabel: "Նվազագույն մակերեսը",
       currency: "AMD",
       invalidPhone: "Մուտքագրեք ճիշտ հեռախոսահամարը։",
+      enterNameAndPhone: "Մուտքագրեք անունը և ճիշտ հեռախոսահամարը։",
+      enterNameOnly: "Մուտքագրեք անունը։",
+      enterPhoneOnly: "Մուտքագրեք ճիշտ հեռախոսահամարը։",
     },
   },
   ru: {
@@ -66,10 +71,15 @@ const translations = {
       enterMessage: "Введите сообщение",
       sendMessage: "Отправить",
       messageSent: "Сообщение отправлено",
+      sendError: "Ошибка отправки сообщения.",
+      close: "Закрыть",
       priceLabel: "Цена за 1 м² начиная с",
       areaLabel: "Минимальная площадь",
       currency: "AMD",
       invalidPhone: "Введите корректный номер телефона.",
+      enterNameAndPhone: "Введите имя и корректный номер телефона.",
+      enterNameOnly: "Введите имя.",
+      enterPhoneOnly: "Введите корректный номер телефона.",
     },
   },
   en: {
@@ -102,24 +112,30 @@ const translations = {
       enterMessage: "Enter message",
       sendMessage: "Send",
       messageSent: "Message sent",
+      sendError: "Error sending message.",
+      close: "Close",
       priceLabel: "Price 1 m² starting from",
       areaLabel: "Minimum area",
       currency: "AMD",
       invalidPhone: "Enter a valid phone number.",
+      enterNameAndPhone: "Enter name and valid phone number.",
+      enterNameOnly: "Enter name.",
+      enterPhoneOnly: "Enter a valid phone number.",
     },
   },
 };
 
-i18n.use(initReactI18next).init({
-  resources: translations,
-  lng: "hy", // основной язык — армянский
-  fallbackLng: "hy", // даже при ошибке — армянский
-  interpolation: {
-    escapeValue: false,
-  },
-});
+const savedLng = localStorage.getItem("i18nextLng");
 
-// Принудительно задаём язык, игнорируя сохранённое значение в localStorage
-localStorage.setItem("i18nextLng", "hy");
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: translations,
+    lng: savedLng || "hy",
+    fallbackLng: "hy",
+    interpolation: {
+      escapeValue: false,
+    },
+  });
 
 export default i18n;
