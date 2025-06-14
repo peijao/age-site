@@ -43,7 +43,7 @@ const Header = ({ t, logo, lang, setLang }) => {
                 smooth
                 duration={600}
                 offset={-80}
-                className="font-bold underline decoration-black decoration-2"
+                className="font-extrabold underline decoration-black decoration-2"
               >
                 {t(`nav${section[0].toUpperCase()}${section.slice(1)}`)}
               </Link>
