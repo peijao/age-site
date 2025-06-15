@@ -4,7 +4,6 @@ import App from './App.jsx';
 import './index.css';
 import './i18n';
 
-// Здесь просто рендерим, тема уже выставлена inline-скриптом
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />

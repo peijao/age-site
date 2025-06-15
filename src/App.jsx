@@ -35,11 +35,9 @@ const App = () => {
     toggleZoom,
   } = useModalGallery(schemas);
 
-  // Тема: по умолчанию dark, с отключенной анимацией на старте
   const [theme, setTheme] = useState("dark");
   const [animationAllowed, setAnimationAllowed] = useState(false);
 
-  // При монтировании подхватываем тему из localStorage или ставим dark
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light" || savedTheme === "dark") {
@@ -49,23 +47,13 @@ const App = () => {
       localStorage.setItem("theme", "dark");
     }
 
-    // Через 100 мс включаем анимацию
-    const timer = setTimeout(() => {
-      setAnimationAllowed(true);
-    }, 100);
-
+    const timer = setTimeout(() => setAnimationAllowed(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Обновляем класс и стиль на html
   useEffect(() => {
     const html = document.documentElement;
-
-    if (animationAllowed) {
-      html.style.transition = "";
-    } else {
-      html.style.transition = "none";
-    }
+    html.style.transition = animationAllowed ? "" : "none";
 
     if (theme === "dark") {
       html.classList.add("dark");
@@ -84,14 +72,37 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-sans transition-colors duration-0">
-      {/* Водяной знак по центру и под контентом */}
+      {/* Водяной знак */}
       <div className="absolute inset-0 z-100 pointer-events-none">
         <Watermark logo={logo} />
       </div>
 
-      {/* Контент поверх водяного знака */}
       <div className="relative z-10">
-        <Toaster position="top-right" reverseOrder={false} />
+        {/* ✅ Единственный Toaster, реагирующий на тему */}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: theme === "dark" ? "#1f2937" : "#f9fafb",
+              color: theme === "dark" ? "#f9fafb" : "#1f2937",
+              border: `1px solid ${theme === "dark" ? "#374151" : "#e5e7eb"}`,
+            },
+            success: {
+              iconTheme: {
+                primary: "#10b981",
+                secondary: theme === "dark" ? "#064e3b" : "#d1fae5",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: theme === "dark" ? "#7f1d1d" : "#fee2e2",
+              },
+            },
+          }}
+        />
+
         <Header
           t={t}
           logo={logo}
@@ -101,9 +112,7 @@ const App = () => {
           toggleTheme={toggleTheme}
           onSelectSection={(section) => {
             const element = document.getElementById(section);
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
+            if (element) element.scrollIntoView({ behavior: "smooth" });
           }}
         />
 
