@@ -9,7 +9,7 @@ const hoverAnimation = {
 
 const imageHoverAnimation = {
   scale: 1.05,
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+  boxShadow: "0 4px 12px rgba(255,255,255,0.15)",
   transition: { type: "spring", stiffness: 300 },
 };
 
@@ -34,23 +34,30 @@ const ProjectsSection = ({ schemas, openModal }) => {
   return (
     <motion.section
       id="projects"
-      className="py-16 bg-gray-50 text-center px-4"
+      className="py-16 bg-white dark:bg-gray-900 text-center px-4"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.05 }}
     >
       <div className="max-w-6xl mx-auto">
-        <h3 className="text-4xl font-bold mb-6 text-gray-900">{t("projectsTitle")}</h3>
-        <p className="text-base mb-4 max-w-4xl mx-auto">{t("projectsAbout")}</p>
-        <p className="text-3xl font-semibold mb-4">{t("projectsSchemes")}</p>
+        <h3 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+          {t("projectsTitle")}
+        </h3>
+        <p className="text-lg mb-4 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
+          {t("projectsAbout")}
+        </p>
+        <p className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+          {t("projectsSchemes")}
+        </p>
 
-        <p className="text-base mb-10">
+        <p className="text-gray-900 dark:text-gray-100 text-base mb-10">
           <motion.button
             onClick={openGeo}
-            className="text-black font-bold border-b-2 border-black leading-none normal-case flex items-center justify-center gap-2 mx-auto cursor-pointer"
+            className="font-bold border-b-2 border-black dark:border-white leading-none normal-case flex items-center justify-center gap-2 mx-auto cursor-pointer text-black dark:text-white"
             whileHover={hoverAnimation}
             aria-label={addressLabel}
+            type="button"
           >
             {addressLabel}
             <svg
@@ -62,50 +69,58 @@ const ProjectsSection = ({ schemas, openModal }) => {
               strokeWidth={2}
               aria-hidden="true"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4.5 8-10a8 8 0 10-16 0c0 5.5 8 10 8 10z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 22s8-4.5 8-10a8 8 0 10-16 0c0 5.5 8 10 8 10z"
+              />
             </svg>
           </motion.button>
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {schemas.map((src, index) => (
-            <div
+            <button
               key={src ?? index}
-              className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-shadow"
+              className="bg-gray-100 dark:bg-gray-800 shadow-lg rounded-lg p-6 cursor-pointer transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
               onClick={() => openModal(index)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={e => (e.key === "Enter" || e.key === " ") && openModal(index)}
-              aria-label={`Схема ${index + 1}`}
+              aria-label={`${t("projectScheme")} ${index + 1}`}
+              type="button"
             >
               <div className="w-full h-48 flex items-center justify-center overflow-hidden">
                 <motion.img
                   src={src}
-                  alt={`Схема ${index + 1}`}
+                  alt={`${t("projectScheme")} ${index + 1}`}
                   className="object-contain max-h-44 w-auto"
                   loading="lazy"
+                  decoding="async"
                   whileHover={imageHoverAnimation}
                 />
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
 
       {isGeoOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-2 sm:px-4">
-          <div className="bg-white rounded-2xl w-full max-w-7xl max-h-[95vh] relative overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-2 sm:px-4">
+          <div className="bg-gray-900 rounded-2xl w-full max-w-7xl max-h-[95vh] relative overflow-hidden shadow-xl">
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 bg-white text-gray-800 hover:text-black rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
-              aria-label="Close modal"
+              className="absolute top-4 right-4 bg-gray-800 text-gray-200 hover:text-white rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
+              aria-label={t("closeModal")}
+              type="button"
             >
               &times;
             </button>
             <div className="w-full h-[80vh]">
               <iframe
-                title="AGE Invest Location"
+                title={t("mapTitle")}
                 src={`https://maps.google.com/maps?q=${coordinatesForMaps}&z=15&output=embed&gestureHandling=greedy`}
                 width="100%"
                 height="100%"

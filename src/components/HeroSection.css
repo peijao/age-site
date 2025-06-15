@@ -25,6 +25,7 @@
   z-index: 0;
 }
 
+/* Обычная светлая тема - темный оверлей */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -37,10 +38,21 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* Тёмная тема - светлый оверлей для контраста */
+.dark .hero-overlay {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .hero-section:hover .hero-overlay {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Контент — цвет текста белый, чтобы читался на темном фоне */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 40rem;
+  color: white;
 }
 
 .hero-content h2 {

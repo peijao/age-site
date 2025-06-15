@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
-import './i18n'; // ← ОБЯЗАТЕЛЬНО ДО App
+import './i18n';
 
+// Здесь просто рендерим, тема уже выставлена inline-скриптом
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />

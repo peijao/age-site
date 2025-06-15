@@ -6,7 +6,7 @@ import posterCrane from "../assets/img/poster_crane.png";
 
 const AboutVideoSection = () => (
   <motion.section
-    className="w-screen my-6"
+    className="w-screen my-6 bg-white dark:bg-gray-900"
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, ease: "easeOut" }}

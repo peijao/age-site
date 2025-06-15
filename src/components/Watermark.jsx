@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import logoLight from "../assets/img/logo.png";
+import logoDark from "../assets/img/logo-white.png";
 
-const Watermark = ({ logo }) => {
+const Watermark = () => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme === "dark") {
+      html.classList.add("dark");
+      setIsDark(true);
+    } else {
+      html.classList.remove("dark");
+      setIsDark(false);
+    }
+
+    const observer = new MutationObserver(() => {
+      setIsDark(html.classList.contains("dark"));
+    });
+
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const logo = isDark ? logoDark : logoLight;
+
   return (
     <>
       <div className="watermark">
