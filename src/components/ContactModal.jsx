@@ -51,7 +51,7 @@ const ContactModal = ({ onClose }) => {
 
       if (!res.ok) throw new Error("Network error");
 
-      toast.success(t("messageSent"), { duration: 5000 });
+      toast.success(t("messageSent"), { duration: 3000 });
       setFormData({ formName: "", formPhone: "", formMessage: "" });
       setTimeout(onClose, 2000);
     } catch {
