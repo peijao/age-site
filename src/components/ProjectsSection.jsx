@@ -44,7 +44,7 @@ const ProjectsSection = ({ schemas, openModal }) => {
         <h3 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
           {t("projectsTitle")}
         </h3>
-        <p className="text-lg mb-4 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
+        <p className="text-xl mb-4 max-w-4xl mx-auto text-black dark:text-gray-300">
           {t("projectsAbout")}
         </p>
         <p className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">

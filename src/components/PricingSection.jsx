@@ -30,7 +30,7 @@ const PricingSection = () => {
       viewport={{ once: true, amount: 0.05 }}
     >
       <p className="text-4xl font-bold mb-4">{t("priceInfoLine1")}</p>
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-3">{t("priceInfoLine2")}</p>
+      <p className="text-xl text-black dark:text-gray-200 mb-3">{t("priceInfoLine2")}</p>
 
       <div className="mb-8 flex flex-col sm:flex-row justify-center items-center gap-8 text-center">
         {priceInfo.map(({ label, value }) => (
@@ -41,7 +41,7 @@ const PricingSection = () => {
         ))}
       </div>
 
-      <p className="text-lg text-gray-500 dark:text-gray-400 mb-4 font-bold">{t("priceInfoLine3")}</p>
+      <p className="text-xl text-black dark:text-gray-200 mb-4 font-semibold">{t("priceInfoLine3")}</p>
 
       <motion.button
         onClick={() => setContactModalOpen(true)}
