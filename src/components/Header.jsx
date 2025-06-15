@@ -87,7 +87,7 @@ const Header = ({ t, lang, setLang, onSelectSection }) => {
           ))}
         </nav>
 
-        <div className="flex items-center ml-12">
+        <div className="flex items-center ml-0">
           <motion.select
             value={lang}
             onChange={handleLangChange}
