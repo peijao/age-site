@@ -2,8 +2,8 @@
 <html lang="hy" class="">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AGE Invest — Մենք պարզապես կառուցում ենք ձեր նոր տունը</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AGE Invest — Мы просто строим ваш новый дом</title>
 
   <!-- Скрипт для установки темы до загрузки React -->
   <script>
@@ -17,13 +17,11 @@
           document.documentElement.classList.add('light');
           document.documentElement.classList.remove('dark');
         } else {
-          // По умолчанию ставим тёмную тему
           document.documentElement.classList.add('dark');
           document.documentElement.classList.remove('light');
           localStorage.setItem('theme', 'dark');
         }
       } catch(e) {
-        // fallback на тёмную тему при ошибке
         document.documentElement.classList.add('dark');
         document.documentElement.classList.remove('light');
       }
@@ -31,29 +29,33 @@
   </script>
 
   <style>
-    /* Базовые стили, чтобы фон менялся сразу */
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       font-family: Arial, sans-serif;
       transition: background-color 0.5s ease, color 0.5s ease;
-      height: 100%;
     }
 
-    /* Тёмная тема */
     html.dark body {
-      background-color: #111827;
-      color: #d1d5db;
+      background-color: #111827; /* bg-gray-900 */
+      color: #d1d5db; /* text-gray-300 */
     }
 
-    /* Светлая тема */
     html.light body {
-      background-color: #ffffff;
-      color: #1f2937;
+      background-color: #ffffff; /* bg-white */
+      color: #1f2937; /* text-gray-800 */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    * {
+      box-sizing: border-box;
     }
   </style>
-  <script type="module" crossorigin src="/age-site/assets/index-Cf_M2oda.js"></script>
-  <link rel="stylesheet" crossorigin href="/age-site/assets/index-1SrLeSLT.css">
+  <script type="module" crossorigin src="/age-site/assets/index-BgGWf1L3.js"></script>
+  <link rel="stylesheet" crossorigin href="/age-site/assets/index-CTtnYLRO.css">
 </head>
 <body class="font-sans transition-colors duration-300">
   <div id="root"></div>
