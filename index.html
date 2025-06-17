@@ -31,19 +31,22 @@
   </script>
 
   <style>
-    /* Можно добавить базовые стили для body на случай если классы ещё не применились */
+    /* Базовые стили, чтобы фон менялся сразу */
     html, body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       transition: background-color 0.5s ease, color 0.5s ease;
+      height: 100%;
     }
 
-    /* Фон по умолчанию (тёмный) */
+    /* Тёмная тема */
     html.dark body {
       background-color: #111827;
       color: #d1d5db;
     }
+
+    /* Светлая тема */
     html.light body {
       background-color: #ffffff;
       color: #1f2937;
@@ -54,5 +57,6 @@
 </head>
 <body class="font-sans transition-colors duration-300">
   <div id="root"></div>
+
 </body>
 </html>
