@@ -48,9 +48,9 @@ const HeroSection = () => {
 
   const contentTransform = isMobile
     ? isExpanded
-      ? "-translate-y-20 brightness-125"
-      : ""
-    : "group-hover:-translate-y-20 group-hover:brightness-125";
+      ? "-translate-y-20 brightness-125 opacity-60"
+      : "opacity-100"
+    : "group-hover:-translate-y-20 group-hover:brightness-125 group-hover:opacity-60";
 
   const titleClass = `text-4xl md:text-6xl font-bold drop-shadow-lg ${
     isRussianMobile
@@ -63,7 +63,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className={`${baseClasses} ${heightClass}`}
+      className={`${baseClasses} ${heightClass} group`}
       style={{
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
@@ -77,7 +77,7 @@ const HeroSection = () => {
       ></div>
 
       <div
-        className={`relative z-10 transition-transform duration-500 transform ${contentTransform}`}
+        className={`relative z-10 transition-all duration-500 transform ${contentTransform}`}
       >
         <h1 className={titleClass}>
           <span>{firstLine}</span>
