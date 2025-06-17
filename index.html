@@ -5,17 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGE Invest — Մենք պարզապես կառուցում ենք ձեր նոր տունը</title>
 
-  <!-- INLINE SCRIPT: всегда ставим тёмную тему -->
+  <!-- Скрипт для установки темы до загрузки React -->
   <script>
     (function() {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        } else if (theme === 'light') {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+        } else {
+          // По умолчанию ставим тёмную тему
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
+        }
+      } catch(e) {
+        // fallback на тёмную тему при ошибке
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
     })();
   </script>
 
   <style>
-    /* Твои стили */
+    /* Можно добавить базовые стили для body на случай если классы ещё не применились */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Фон по умолчанию (тёмный) */
+    html.dark body {
+      background-color: #111827;
+      color: #d1d5db;
+    }
+    html.light body {
+      background-color: #ffffff;
+      color: #1f2937;
+    }
   </style>
   <script type="module" crossorigin src="/age-site/assets/index-Cf_M2oda.js"></script>
   <link rel="stylesheet" crossorigin href="/age-site/assets/index-1SrLeSLT.css">
