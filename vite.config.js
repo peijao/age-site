@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import javascriptObfuscator from 'rollup-plugin-javascript-obfuscator';
 
 export default defineConfig({
-  base: '/age-site/',  // базовый путь для GitHub Pages
+  base: '/age-site/',
   plugins: [
     react(),
     {
@@ -32,14 +32,14 @@ export default defineConfig({
     },
   ],
   build: {
-    minify: 'terser',  // используем terser для минификации
+    minify: 'terser',
     terserOptions: {
       format: {
-        comments: false, // удаляем комментарии
+        comments: false,
       },
       compress: {
-        drop_console: true,   // удаляем console.log
-        drop_debugger: true,  // удаляем debugger
+        drop_console: true,
+        drop_debugger: true,
       },
     },
   },

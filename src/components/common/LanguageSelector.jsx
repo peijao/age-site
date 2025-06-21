@@ -12,7 +12,7 @@ const LanguageSelector = () => {
     <div className="flex gap-2">
       <button onClick={() => changeLanguage('en')} className="text-sm underline">EN</button>
       <button onClick={() => changeLanguage('ru')} className="text-sm underline">RU</button>
-      <button onClick={() => changeLanguage('hy')} className="text-sm underline">AM</button> {/* <-- здесь исправление */}
+      <button onClick={() => changeLanguage('hy')} className="text-sm underline">AM</button> 
     </div>
   );
 };

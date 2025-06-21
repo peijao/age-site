@@ -12,7 +12,6 @@ const ProjectsSection = ({ schemas, openModal }) => {
 
   const addressLabelRaw = t("projectsAddress");
 
-  // Для английского языка капитализируем каждое слово (если нужно)
   const addressLabel = i18n.language === "en" 
     ? capitalizeWords(addressLabelRaw) 
     : addressLabelRaw;
@@ -21,7 +20,6 @@ const ProjectsSection = ({ schemas, openModal }) => {
 
   const [isGeoOpen, setGeoOpen] = useState(false);
 
-  // Блокировка прокрутки body при открытии модалки
   useEffect(() => {
     if (isGeoOpen) {
       document.body.style.overflow = "hidden";
@@ -67,7 +65,6 @@ const ProjectsSection = ({ schemas, openModal }) => {
         </div>
       </div>
 
-      {/* Модалка с картой */}
       {isGeoOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-2 sm:px-4">
           <div className="bg-white rounded-2xl w-full max-w-7xl max-h-[95vh] relative overflow-hidden">
