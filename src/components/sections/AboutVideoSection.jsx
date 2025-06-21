@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import craneVideoMp4 from "../assets/videos/crane.mp4";
-import craneVideoWebm from "../assets/videos/crane.webm";
-import posterCrane from "../assets/img/poster_crane.png";
+import craneVideoMp4 from "../../assets/videos/crane.mp4";
+import craneVideoWebm from "../../assets/videos/crane.webm";
+import posterCrane from "../../assets/img/poster_crane.png";
 
 const AboutVideoSection = () => (
   <motion.section

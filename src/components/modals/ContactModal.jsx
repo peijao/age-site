@@ -109,7 +109,7 @@ const ContactModal = ({ onClose }) => {
               <label className="block text-left text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t("formPhone")}
               </label>
-              <div className="phone-input-wrapper rounded border border-gray-300 dark:border-gray-600">
+              <div className="phone-input-wrapper rounded border border-gray-300 dark:border-gray-600 px-4 py-2">
                 <PhoneInput
                   international
                   defaultCountry="AM"
@@ -117,7 +117,6 @@ const ContactModal = ({ onClose }) => {
                   onChange={(val) =>
                     setFormData((prev) => ({ ...prev, formPhone: val }))
                   }
-                  inputClassName="w-full bg-transparent text-black dark:text-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   placeholder={t("enterPhone")}
                 />
               </div>

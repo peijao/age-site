@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import background from "../assets/img/background.jpg";
+import background from "../../assets/img/background.jpg";
 import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {

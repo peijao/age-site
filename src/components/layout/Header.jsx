@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
-import logoLight from "../assets/img/logo.png";
-import logoDark from "../assets/img/logo-white.png";
+import logoLight from "../../assets/img/logo.png";
+import logoDark from "../../assets/img/logo-white.png";
 
 const hoverAnimation = {
   scale: 1.1,
-  textDecoration: "underline",
   transition: { type: "spring", stiffness: 300 },
 };
 
@@ -80,7 +79,7 @@ const Header = ({ t, lang, setLang, onSelectSection }) => {
                 onSelectSection(section);
               }}
             >
-              <span className="font-extrabold underline decoration-black dark:decoration-white decoration-2 text-black dark:text-white">
+              <span className="font-extrabold hover:underline decoration-black dark:decoration-white decoration-2 text-black dark:text-white">
                 {t(`nav${section[0].toUpperCase()}${section.slice(1)}`)}
               </span>
             </motion.div>

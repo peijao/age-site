@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import logoLight from "../assets/img/logo.png";
-import logoDark from "../assets/img/logo-white.png";
+import logoLight from "../../assets/img/logo.png";
+import logoDark from "../../assets/img/logo-white.png";
 
 const Watermark = () => {
   const [isDark, setIsDark] = useState(false);

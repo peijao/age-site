@@ -4,19 +4,19 @@ import { useTranslation } from "react-i18next";
 import background from "./assets/img/background.jpg";
 import logo from "./assets/img/logo.png";
 
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import AboutSection from "./components/AboutSection";
-import AboutVideoSection from "./components/AboutVideoSection";
-import ProjectsSection from "./components/ProjectsSection";
-import PricingSection from "./components/PricingSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
-import ModalGallery from "./components/ModalGallery";
-import Watermark from "./components/Watermark";
+import Header from "./components/layout/Header";
+import HeroSection from "./components/sections/HeroSection";
+import AboutSection from "./components/sections/AboutSection";
+import AboutVideoSection from "./components/sections/AboutVideoSection";
+import ProjectsSection from "./components/sections/ProjectsSection";
+import PricingSection from "./components/sections/PricingSection";
+import ContactSection from "./components/sections/ContactSection";
+import Footer from "./components/layout/Footer";
+import ModalGallery from "./components/modals/ModalGallery";
+import Watermark from "./components/common/Watermark";
 
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
-import { schemas } from "./constants";
+import { schemas } from "./constants/constants";
 import useLanguage from "./hooks/useLanguage";
 import useModalGallery from "./hooks/useModalGallery";
 
@@ -39,13 +39,8 @@ const App = () => {
   const [animationAllowed, setAnimationAllowed] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setTheme(savedTheme);
-    } else {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-    }
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    setTheme(savedTheme);
 
     const timer = setTimeout(() => setAnimationAllowed(true), 100);
     return () => clearTimeout(timer);
@@ -78,7 +73,6 @@ const App = () => {
       </div>
 
       <div className="relative z-10">
-        {/* ✅ Единственный Toaster, реагирующий на тему */}
         <Toaster
           position="top-right"
           toastOptions={{
@@ -116,7 +110,6 @@ const App = () => {
           }}
         />
 
-        {/* Секции */}
         <HeroSection id="hero" background={background} t={t} />
         <AboutSection id="about" t={t} />
         <AboutVideoSection id="about-video" />

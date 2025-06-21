@@ -4,8 +4,8 @@ import {
   PhoneIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/solid";
-import logoDark from "../assets/img/logo.png";
-import logoLight from "../assets/img/logo-white.png";
+import logoDark from "../../assets/img/logo.png";
+import logoLight from "../../assets/img/logo-white.png";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import {

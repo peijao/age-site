@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ContactModal from "./ContactModal";
+import ContactModal from "../modals/ContactModal";
 import { motion } from "framer-motion";
 
 const PricingSection = () => {
