@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import translations from "./translations"; // <-- твой translations.js
+import translations from "./translations";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -8,7 +8,7 @@ i18n.use(initReactI18next).init({
     ru: { translation: translations.ru },
     en: { translation: translations.en },
   },
-  lng: "hy", // текущий язык — можешь поставить "ru" или "en"
+  lng: "hy", // current language
   fallbackLng: "hy",
   interpolation: {
     escapeValue: false,

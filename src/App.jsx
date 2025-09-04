@@ -39,14 +39,11 @@ const App = () => {
   const [animationAllowed, setAnimationAllowed] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setTheme(savedTheme);
-    } else {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-    }
-
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    const savedLang = localStorage.getItem("language") || "hy";
+    setTheme(savedTheme);
+    changeLanguage(savedLang);
+    
     const timer = setTimeout(() => setAnimationAllowed(true), 100);
     return () => clearTimeout(timer);
   }, []);
@@ -70,15 +67,19 @@ const App = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
+  const handleLanguageChange = (language) => {
+    changeLanguage(language);
+    localStorage.setItem('language', language);
+  }
+
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-sans transition-colors duration-0">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-sans transition-colors duration-0 overflow-hidden">
       {/* Водяной знак */}
-      <div className="absolute inset-0 z-100 pointer-events-none">
+      <div className="absolute inset-0 z-1 pointer-events-none">
         <Watermark logo={logo} />
       </div>
 
       <div className="relative z-10">
-        {/* ✅ Единственный Toaster, реагирующий на тему */}
         <Toaster
           position="top-right"
           toastOptions={{
@@ -106,7 +107,7 @@ const App = () => {
         <Header
           t={t}
           logo={logo}
-          setLang={changeLanguage}
+          setLang={handleLanguageChange}
           lang={lang}
           theme={theme}
           toggleTheme={toggleTheme}
@@ -116,7 +117,6 @@ const App = () => {
           }}
         />
 
-        {/* Секции */}
         <HeroSection id="hero" background={background} t={t} />
         <AboutSection id="about" t={t} />
         <AboutVideoSection id="about-video" />

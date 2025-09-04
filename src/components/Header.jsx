@@ -54,12 +54,12 @@ const Header = ({ t, lang, setLang, onSelectSection }) => {
   const companyName = "AGE Invest";
 
   return (
-    <header className="bg-white dark:bg-gray-900 shadow sticky top-0 z-50 border-b border-gray-300 dark:border-gray-700">
+    <header className="p-[10px] bg-white dark:bg-gray-900 shadow sticky top-0 z-50 border-b border-gray-300 dark:border-gray-700">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 px-4">
         <img
           src={isDark ? logoDark : logoLight}
           alt="AGE Invest Logo"
-          className="h-8 w-auto sm:h-12"
+          className="h-8 w-auto sm:h-16"
         />
       </div>
 

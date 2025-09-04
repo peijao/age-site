@@ -187,6 +187,43 @@ const ContactModal = ({ onClose }) => {
             .dark .phone-input-wrapper input:focus {
               box-shadow: 0 0 0 2px white !important;
             }
+            
+            /* Style the country selector dropdown */
+            .PhoneInputCountrySelect {
+              background-color: transparent !important;
+              color: inherit !important;
+              border: none !important;
+            }
+            
+            .dark .PhoneInputCountrySelect {
+              background-color: #374151 !important; /* gray-700 */
+              color: #f9fafb !important; /* gray-50 */
+            }
+            
+            /* Style the dropdown options */
+            .PhoneInputCountrySelectArrow {
+              color: inherit !important;
+            }
+            
+            .dark .PhoneInputCountrySelectArrow {
+              color: #f9fafb !important;
+            }
+            
+            /* Style the country list dropdown */
+            .PhoneInputCountrySelect option {
+              background-color: white !important;
+              color: black !important;
+            }
+            
+            .dark .PhoneInputCountrySelect option {
+              background-color: #374151 !important; /* gray-700 */
+              color: #f9fafb !important; /* gray-50 */
+            }
+            
+            /* Style the flag icon area */
+            .PhoneInputCountryIcon {
+              background-color: transparent !important;
+            }
           `}</style>
         </motion.div>
       </motion.div>

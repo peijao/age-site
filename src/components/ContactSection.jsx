@@ -32,13 +32,14 @@ const contactItems = [
     Icon: MapPinIcon,
     contentKey: "contactAddress",
     isLink: false,
+    isGeoLink: true,
   },
   {
     Icon: PhoneIcon,
     contentKey: "contactPhone",
     isLink: true,
     hrefPrefix: "tel:",
-    hrefValue: "+37444304206",
+    hrefValue: "+37455401501",
   },
   {
     Icon: EnvelopeIcon,
@@ -60,12 +61,12 @@ const socialLinks = [
     Icon: FaLinkedinIn,
   },
   {
-    href: "viber://chat?number=%2B37444304206",
+    href: "viber://chat?number=%2B37455401501",
     color: "#59267C",
     Icon: FaViber,
   },
   {
-    href: "tg://resolve?domain=NAME TELEGRAM",
+    href: "https://t.me/+37455401501",
     color: "#0088CC",
     Icon: FaTelegramPlane,
   },
@@ -74,6 +75,10 @@ const socialLinks = [
 const Contacts = () => {
   const { t } = useTranslation();
   const [isDark, setIsDark] = useState(false);
+  const [isGeoOpen, setGeoOpen] = useState(false);
+
+  // Coordinates for Armavir, Armenia: 40°09'17.0"N 44°02'18.8"E
+  const coordinatesForMaps = "40.154722,44.038555";
 
   useEffect(() => {
     const checkDark = () => {
@@ -91,76 +96,122 @@ const Contacts = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isGeoOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isGeoOpen]);
+
   return (
-    <motion.section
-      id="contact"
-      className="pt-0 -mt-12 pb-4 px-4 bg-white dark:bg-gray-900"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.15 }}
-    >
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between text-sm gap-y-4">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <img
-            src={isDark ? logoLight : logoDark}
-            alt="AGE Invest Logo"
-            style={{ height: "110px", width: "auto" }}
-          />
+    <>
+      <motion.section
+        id="contact"
+        className="pt-0 -mt-12 pb-4 px-4 bg-white dark:bg-gray-900"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between text-sm gap-y-4">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <img
+              src={isDark ? logoLight : logoDark}
+              alt="AGE Invest Logo"
+              style={{ height: "110px", width: "auto" }}
+            />
+          </div>
+
+          <div className="text-center md:text-left space-y-2 order-last md:order-none text-gray-700 dark:text-gray-300">
+            {contactItems.map(({ Icon, contentKey, isLink, isGeoLink, hrefPrefix, hrefValue }) => (
+              <p
+                key={contentKey}
+                className="flex items-center gap-2 justify-center md:justify-start"
+              >
+                <Icon style={iconStyle} className="text-black dark:text-white shrink-0" />
+                {isLink ? (
+                  <motion.a
+                    href={`${hrefPrefix}${hrefValue ?? t(contentKey)}`}
+                    className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
+                    whileHover={hoverAnimation}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {t(contentKey)}
+                  </motion.a>
+                ) : isGeoLink ? (
+                  <motion.button
+                    onClick={() => setGeoOpen(true)}
+                    className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
+                    whileHover={hoverAnimation}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span style={{ whiteSpace: 'pre-line' }}>{t(contentKey)}</span>
+                  </motion.button>
+                ) : (
+                  <span className="text-sm font-bold text-black dark:text-white" style={{ whiteSpace: 'pre-line' }}>
+                    {t(contentKey)}
+                  </span>
+                )}
+              </p>
+            ))}
+          </div>
         </div>
 
-        <div className="text-center md:text-left space-y-2 order-last md:order-none text-gray-700 dark:text-gray-300">
-          {contactItems.map(({ Icon, contentKey, isLink, hrefPrefix, hrefValue }) => (
-            <p
-              key={contentKey}
-              className="flex items-center gap-2 justify-center md:justify-start"
-            >
-              <Icon style={iconStyle} className="text-black dark:text-white shrink-0" />
-              {isLink ? (
-                <motion.a
-                  href={`${hrefPrefix}${hrefValue ?? t(contentKey)}`}
-                  className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
-                  whileHover={hoverAnimation}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {t(contentKey)}
-                </motion.a>
-              ) : (
-                <span className="text-sm font-bold text-black dark:text-white">
-                  {t(contentKey)}
-                </span>
-              )}
-            </p>
-          ))}
+        <div className="flex justify-center mt-2 mb-4">
+          <div className="flex gap-8 md:gap-16 -mt-[3rem] mt-8 md:mt-0">
+            {socialLinks.map(({ href, color, Icon }) => (
+              <motion.a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black opacity-70 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
+                style={{
+                  color,
+                  filter: `drop-shadow(0 0 5px ${color})`,
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  opacity: 1,
+                  transition: { type: "spring", stiffness: 300 },
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Icon size={18} />
+              </motion.a>
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.section>
 
-      <div className="flex justify-center mt-2 mb-4">
-        <div className="flex gap-8 md:gap-16 -mt-[3rem] mt-8 md:mt-0">
-          {socialLinks.map(({ href, color, Icon }) => (
-            <motion.a
-              key={href}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-black opacity-70 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
-              style={{
-                color,
-                filter: `drop-shadow(0 0 5px ${color})`,
-              }}
-              whileHover={{
-                scale: 1.1,
-                opacity: 1,
-                transition: { type: "spring", stiffness: 300 },
-              }}
-              whileTap={{ scale: 0.95 }}
+      {/* Geo Modal */}
+      {isGeoOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-2 sm:px-4">
+          <div className="bg-gray-900 rounded-2xl w-full max-w-7xl max-h-[95vh] relative overflow-hidden shadow-xl">
+            <button
+              onClick={() => setGeoOpen(false)}
+              className="absolute top-4 right-4 bg-gray-800 text-gray-200 hover:text-white rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
+              aria-label="Close modal"
+              type="button"
             >
-              <Icon size={18} />
-            </motion.a>
-          ))}
+              &times;
+            </button>
+            <div className="w-full h-[80vh]">
+              <iframe
+                title="AGE Invest Contact Location"
+                src={`https://maps.google.com/maps?q=${coordinatesForMaps}&z=15&output=embed&gestureHandling=greedy`}
+                width="100%"
+                height="100%"
+                className="w-full h-full rounded-2xl"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.section>
+      )}
+    </>
   );
 };
 
