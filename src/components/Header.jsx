@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
-import logoLight from "../assets/img/logo.png";
-import logoDark from "../assets/img/logo-white.png";
 
 const hoverAnimation = {
   scale: 1.1,
@@ -57,7 +55,7 @@ const Header = ({ t, lang, setLang, onSelectSection }) => {
     <header className="p-[10px] bg-white dark:bg-gray-900 shadow sticky top-0 z-50 border-b border-gray-300 dark:border-gray-700">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 px-4">
         <img
-          src={isDark ? logoDark : logoLight}
+          src={isDark ? "/logo-white.png" : "/logo.png"}
           alt="AGE Invest Logo"
           className="h-8 w-auto sm:h-16"
         />
