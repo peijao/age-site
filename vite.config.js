@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import javascriptObfuscator from 'rollup-plugin-javascript-obfuscator';
 
 export default defineConfig({
-  base: '/',
+  base: '/age-site/',
   plugins: [
     react(),
     {
