@@ -1,58 +1,30 @@
 <!DOCTYPE html>
-<html lang="hy">
+<html lang="hy" class="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGE Invest — Մենք պարզապես կառուցում ենք ձեր նոր տունը</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+
+  <!-- INLINE SCRIPT: всегда ставим тёмную тему -->
+  <script>
+    (function() {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    })();
+  </script>
+
   <style>
-    .bg-hero {
-      position: relative;
-      width: 100vw;
-      height: 300px;
-      max-width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      background-image: url('img/background.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: white;
-      text-align: center;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 2rem;
-      transition: height 0.5s ease;
-    }
-
-    .bg-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: background-color 0.5s ease;
-      z-index: 0;
-    }
-
-    .bg-hero:hover::before {
-      background-color: rgba(0, 0, 0, 0.25);
-    }
-
-    .bg-hero:hover {
-      height: 80vh;
-    }
-
-    .content-wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
-    }
+    /* Твои стили */
   </style>
-  <script type="module" crossorigin src="/age-site/assets/index-CVhH4vIj.js"></script>
-  <link rel="stylesheet" crossorigin href="/age-site/assets/index-CAKJOF0_.css">
+  <script type="module" crossorigin src="/assets/index-CfV0NVRt.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DLU-jIGd.css">
 </head>
-<body class="bg-white text-gray-800 font-sans">
+<body class="font-sans transition-colors duration-300">
   <div id="root"></div>
+<link rel="icon" href="/assets/img/logo.png">
 </body>
 </html>
