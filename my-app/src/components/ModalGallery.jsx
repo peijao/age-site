@@ -6,7 +6,7 @@ export const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal })
   const imageRef = useRef(null);
   const containerRef = useRef(null);
   const [zoomed, setZoomed] = useState(false);
-  const [lastClick, setLastClick] = useState(null);
+  const [zoomTransform, setZoomTransform] = useState("");
   const zoomFactor = 3;
 
   const isOpen = modalIndex !== null;
@@ -14,35 +14,53 @@ export const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal })
 
   const handleImageClick = (e) => {
     e.stopPropagation();
-    let clientX, clientY;
-    if (e.type === 'touchend' && e.changedTouches && e.changedTouches.length > 0) {
-      clientX = e.changedTouches[0].clientX;
-      clientY = e.changedTouches[0].clientY;
+    
+    if (zoomed) {
+      setZoomed(false);
+      setZoomTransform("");
     } else {
-      clientX = e.clientX;
-      clientY = e.clientY;
+      const container = containerRef.current;
+      const image = imageRef.current;
+      
+      if (container && image) {
+        const containerRect = container.getBoundingClientRect();
+        const imageRect = image.getBoundingClientRect();
+        
+        // Calculate click position relative to the image
+        const clickX = e.clientX - imageRect.left;
+        const clickY = e.clientY - imageRect.top;
+        
+        // Calculate relative position (0-1)
+        const relativeX = clickX / imageRect.width;
+        const relativeY = clickY / imageRect.height;
+        
+        // Calculate the image's current position relative to container center
+        const imageCenterX = imageRect.left + imageRect.width / 2;
+        const imageCenterY = imageRect.top + imageRect.height / 2;
+        const containerCenterX = containerRect.left + containerRect.width / 2;
+        const containerCenterY = containerRect.top + containerRect.height / 2;
+        
+        // Current offset of image center from container center
+        const currentOffsetX = imageCenterX - containerCenterX;
+        const currentOffsetY = imageCenterY - containerCenterY;
+        
+        // Calculate where the clicked point will be after scaling
+        const scaledImageWidth = imageRect.width * zoomFactor;
+        const scaledImageHeight = imageRect.height * zoomFactor;
+        
+        // Position of clicked point relative to the new scaled image center
+        const clickOffsetFromCenterX = (relativeX - 0.5) * scaledImageWidth;
+        const clickOffsetFromCenterY = (relativeY - 0.5) * scaledImageHeight;
+        
+        // Calculate final translation to center the clicked point
+        const translateX = currentOffsetX - clickOffsetFromCenterX;
+        const translateY = currentOffsetY - clickOffsetFromCenterY;
+        
+        setZoomTransform(`translate(${translateX}px, ${translateY}px) scale(${zoomFactor})`);
+        setZoomed(true);
+      }
     }
-    setLastClick({ clientX, clientY });
-    setZoomed((z) => !z);
   };
-
-  useEffect(() => {
-    if (zoomed && lastClick) {
-      setTimeout(() => {
-        const container = imageRef.current.parentElement;
-        const img = imageRef.current;
-        const rect = img.getBoundingClientRect();
-        const x = lastClick.clientX - rect.left;
-        const y = lastClick.clientY - rect.top;
-        const newX = x * zoomFactor;
-        const newY = y * zoomFactor;
-        const scrollX = Math.max(0, newX - container.clientWidth / 2);
-        const scrollY = Math.max(0, newY - container.clientHeight / 2);
-        container.scrollLeft = scrollX;
-        container.scrollTop = scrollY;
-      }, 0);
-    }
-  }, [zoomed, lastClick]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -79,6 +97,7 @@ export const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal })
   const handleBackdropClick = () => {
     if (zoomed) {
       setZoomed(false);
+      setZoomTransform("");
     } else {
       closeModal();
     }
@@ -87,74 +106,103 @@ export const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal })
   if (!isOpen || !currentItem) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 px-1 sm:px-2" onClick={handleBackdropClick}>
-      <div className="bg-gray-900 rounded-2xl w-full max-w-[90vw] max-h-[98vh] relative overflow-hidden shadow-2xl border-2 border-gray-800" onClick={e => e.stopPropagation()}>
-        <button
-          onClick={closeModal}
-          className="absolute top-4 right-4 bg-gray-800 text-gray-200 hover:text-white rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
-          aria-label="Close modal"
-          type="button"
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center"
+        onClick={handleBackdropClick}
+      >
+        {/* Close Button */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            closeModal();
+          }}
         >
-          &times;
-        </button>
+          <XMarkIcon className="w-6 h-6" />
+        </motion.button>
+
+        {/* Navigation Buttons */}
         {schemas.length > 1 && (
           <>
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-800 text-gray-200 hover:text-white rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
-              aria-label="Предыдущая схема"
-              type="button"
-              onClick={e => {
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+              onClick={(e) => {
                 e.stopPropagation();
-                setZoomed(false);
                 navigateModal('prev');
               }}
             >
               <ChevronLeftIcon className="w-6 h-6" />
-            </button>
-            <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-800 text-gray-200 hover:text-white rounded-full shadow-md w-10 h-10 flex items-center justify-center z-10"
-              aria-label="Следующая схема"
-              type="button"
-              onClick={e => {
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 bg-black bg-opacity-50 rounded-full p-2"
+              onClick={(e) => {
                 e.stopPropagation();
-                setZoomed(false);
                 navigateModal('next');
               }}
             >
               <ChevronRightIcon className="w-6 h-6" />
-            </button>
+            </motion.button>
           </>
         )}
-  <div className="w-full h-[90vh] flex items-center justify-center">
-          <div className={zoomed ? "overflow-auto w-full h-full" : "w-full h-full flex items-center justify-center"} style={{width: "100%", height: "100%"}}>
-            <img
-              ref={imageRef}
-              key={modalIndex}
-              src={currentItem}
-              alt={`Схема ${modalIndex + 1}`}
-              onClick={handleImageClick}
-              onTouchEnd={handleImageClick}
-              style={{
-                width: zoomed ? `${zoomFactor * 100}%` : "auto",
-                height: zoomed ? `${zoomFactor * 100}%` : "auto",
-                maxWidth: zoomed ? "none" : "100%",
-                maxHeight: zoomed ? "none" : "100%",
-                display: "block",
-                objectFit: "contain",
-                margin: zoomed ? 0 : "auto",
-                cursor: zoomed ? "zoom-out" : "zoom-in",
-              }}
-              draggable={false}
-            />
-          </div>
-        </div>
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg">
+
+        {/* Image Container */}
+        <motion.div
+          ref={containerRef}
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="relative overflow-hidden bg-black flex items-center justify-center"
+          style={{
+            width: "90vw",
+            height: "90vh",
+            cursor: zoomed ? "zoom-out" : "zoom-in",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <motion.img
+            ref={imageRef}
+            key={modalIndex}
+            src={currentItem}
+            alt={`Схема ${modalIndex + 1}`}
+            onClick={handleImageClick}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              display: "block",
+              transition: "transform 0.3s ease",
+              transform: zoomTransform || "scale(1)",
+              userSelect: "none",
+            }}
+            draggable={false}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.div>
+
+        {/* Image Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg"
+        >
           <p className="text-sm text-gray-300">
             {modalIndex + 1} / {schemas.length}
           </p>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

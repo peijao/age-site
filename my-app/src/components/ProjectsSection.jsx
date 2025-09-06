@@ -109,30 +109,31 @@ const ProjectsSection = ({ schemas, openModal, setDocOpen, isDocOpen }) => {
               />
             </svg>
           </motion.button>
-      {isDocOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" onClick={() => setDocOpen(false)}>
-          <div className="relative w-full max-w-6xl h-[92vh] bg-transparent" onClick={e => e.stopPropagation()}>
-            <button
-              onClick={() => setDocOpen(false)}
-              className="absolute top-2 right-2 bg-gray-800 text-gray-200 hover:text-white rounded-full w-8 h-8 flex items-center justify-center z-10 text-lg"
-              aria-label={t("closeModal")}
-              type="button"
-            >
-              &times;
-            </button>
-            <iframe
-              title={t("projectsDocument")}
-              src="/documents/ՇԹ-341-12917-25.pdf"
-              width="100%"
-              height="100%"
-              style={{ border: "none", background: "transparent" }}
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
-        </div>
-      )}
         </p>
+        {/* Модальное окно документа вынесено из <p> */}
+        {isDocOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50" onClick={() => setDocOpen(false)}>
+            <div className="relative w-full max-w-6xl h-[92vh] bg-transparent" onClick={e => e.stopPropagation()}>
+              <button
+                onClick={() => setDocOpen(false)}
+                className="absolute top-2 right-2 bg-gray-800 text-gray-200 hover:text-white rounded-full w-8 h-8 flex items-center justify-center z-10 text-lg"
+                aria-label={t("closeModal")}
+                type="button"
+              >
+                &times;
+              </button>
+              <iframe
+                title={t("projectsDocument")}
+                src="/documents/ՇԹ-341-12917-25.pdf"
+                width="100%"
+                height="100%"
+                style={{ border: "none", background: "transparent" }}
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {schemas.map((image, index) => (
