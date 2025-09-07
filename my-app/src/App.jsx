@@ -23,7 +23,6 @@ import useModalGallery from "./hooks/useModalGallery";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const [isDocOpen, setDocOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const { lang, changeLanguage } = useLanguage(i18n);
   const {
@@ -76,11 +75,9 @@ const App = () => {
   return (
     <div className="relative min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-sans transition-colors duration-0 overflow-hidden">
       {/* Водяной знак */}
-      {modalIndex === null && !isDocOpen && (
-        <div className="absolute inset-0 z-1 pointer-events-none">
-          <Watermark logo={logo} />
-        </div>
-      )}
+      <div className="absolute inset-0 z-1 pointer-events-none">
+        <Watermark logo={logo} />
+      </div>
 
       <div className="relative z-10">
         <Toaster
@@ -123,7 +120,7 @@ const App = () => {
         <HeroSection id="hero" background={background} t={t} />
         <AboutSection id="about" t={t} />
         <AboutVideoSection id="about-video" />
-  <ProjectsSection id="projects" schemas={schemas} openModal={openModal} lang={lang} setDocOpen={setDocOpen} isDocOpen={isDocOpen} />
+        <ProjectsSection id="projects" schemas={schemas} openModal={openModal} lang={lang} />
         <PricingSection id="pricing" t={t} />
         <ContactSection
           id="contact"

@@ -207,4 +207,3 @@ export const ModalGallery = ({ modalIndex, schemas, closeModal, navigateModal })
 };
 
 export default ModalGallery;
-
