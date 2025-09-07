@@ -52,7 +52,7 @@ const Watermark = () => {
           width: 65vw;
           max-width: 1000px;
           height: auto;
-          opacity: 0.06;
+          opacity: 0.045;
           z-index: 9999;
           user-select: none;
           pointer-events: none;

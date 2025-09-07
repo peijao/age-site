@@ -118,42 +118,44 @@ const Contacts = () => {
             <img
               src={isDark ? logoLight : logoDark}
               alt="AGE Invest Logo"
-              style={{ height: "110px", width: "auto" }}
+              style={{ height: "140px", width: "auto" }}
             />
           </div>
 
-          <div className="text-center md:text-left space-y-2 order-last md:order-none text-gray-700 dark:text-gray-300">
-            {contactItems.map(({ Icon, contentKey, isLink, isGeoLink, hrefPrefix, hrefValue }) => (
-              <p
-                key={contentKey}
-                className="flex items-center gap-2 justify-center md:justify-start"
+          <div className="flex flex-col items-center justify-center flex-1">
+            <div className="mb-2">
+              <motion.button
+                onClick={() => setGeoOpen(true)}
+                className="flex items-center gap-2 text-base font-semibold underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer justify-center"
+                style={{ marginLeft: '-1mm' }}
+                whileHover={hoverAnimation}
+                whileTap={{ scale: 0.95 }}
               >
-                <Icon style={iconStyle} className="text-black dark:text-white shrink-0" />
-                {isLink ? (
-                  <motion.a
-                    href={`${hrefPrefix}${hrefValue ?? t(contentKey)}`}
-                    className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
-                    whileHover={hoverAnimation}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {t(contentKey)}
-                  </motion.a>
-                ) : isGeoLink ? (
-                  <motion.button
-                    onClick={() => setGeoOpen(true)}
-                    className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
-                    whileHover={hoverAnimation}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span style={{ whiteSpace: 'pre-line' }}>{t(contentKey)}</span>
-                  </motion.button>
-                ) : (
-                  <span className="text-sm font-bold text-black dark:text-white" style={{ whiteSpace: 'pre-line' }}>
-                    {t(contentKey)}
-                  </span>
-                )}
-              </p>
-            ))}
+                <MapPinIcon style={iconStyle} className="text-black dark:text-white shrink-0" />
+                <span style={{ whiteSpace: 'pre-line' }}>{t("contactAddress")}</span>
+              </motion.button>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <motion.a
+              href={`tel:+37455401501`}
+              className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
+              whileHover={hoverAnimation}
+              whileTap={{ scale: 0.95 }}
+            >
+              <PhoneIcon style={iconStyle} className="text-black dark:text-white shrink-0" />
+              {t("contactPhone")}
+            </motion.a>
+            <motion.a
+              href={`mailto:${t("contactEmail")}`}
+              className="flex items-center gap-2 text-sm font-black underline decoration-black dark:decoration-white text-black dark:text-white cursor-pointer"
+              whileHover={hoverAnimation}
+              whileTap={{ scale: 0.95 }}
+            >
+              <EnvelopeIcon style={iconStyle} className="text-black dark:text-white shrink-0" />
+              {t("contactEmail")}
+            </motion.a>
           </div>
         </div>
 

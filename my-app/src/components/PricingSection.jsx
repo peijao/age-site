@@ -29,8 +29,9 @@ const PricingSection = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.05 }}
     >
-      <p className="text-4xl font-bold mb-4">{t("priceInfoLine1")}</p>
-      <p className="text-xl text-black dark:text-gray-200 mb-3">{t("priceInfoLine2")}</p>
+  <p className="text-4xl font-bold mb-4">{t("priceInfoLine1")}</p>
+  <p className="text-xl text-black dark:text-gray-200 mb-3">{t("priceInfoLine2")}</p>
+  <p className="text-base text-black dark:text-gray-200 mb-4 font-semibold">{t("taxLawNote")}</p>
 
       <div className="mb-8 flex flex-col sm:flex-row justify-center items-center gap-8 text-center">
         {priceInfo.map(({ label, value }) => (
