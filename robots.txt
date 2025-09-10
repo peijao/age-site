@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ageinvest.am/sitemap.xml
