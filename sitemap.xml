@@ -12,4 +12,8 @@
       <loc>https://ageinvest.am/contact</loc>
       <priority>0.8</priority>
    </url>
+   <url>
+      <loc>https://ageinvest.am/projects</loc>
+      <priority>0.8</priority>
+   </url>
 </urlset>
